@@ -30,8 +30,6 @@ int main()
             for(Disciplina disciplina : maisOfertadas)
             {
                 disciplina.imprimir_alocacao();
-                //for(Alocacao aloc : disciplina.GetAlocacoes())
-                //    std::cout << disciplina.GetCodigo() << " " << disciplina.GetNome() << " " << aloc.GetDia() << " " << aloc.GetHorario() << " " << aloc.GetSala() << std::endl;
             }
             
         } 
