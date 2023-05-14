@@ -16,6 +16,13 @@ Sistema::Sistema(double preco_corrida)
     _preco_corrida = preco_corrida;    
 }
 
+Sistema::~Sistema() 
+{
+    _frota.limpar_carros_cadastrados();
+    limpar_todos_os_clientes();
+}
+
+
 Cliente* Sistema::cadastra_cliente(std::string nome) 
 {
     if (_clientes.count(nome) > 0)

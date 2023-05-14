@@ -40,6 +40,11 @@ class Sistema {
         Sistema(double preco_corrida);
 
         /*
+         * @brief Responsável por gerenciar a liberação da memória alocada durante a execução antes da destruição do objeto sistema.
+         */
+        ~Sistema();
+
+        /*
          * @brief Adiciona um carro a frota.
          * @throws Lança uma exceção caso o id já esteja cadastrado.
          */
