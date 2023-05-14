@@ -7,9 +7,8 @@ void Frota::adicionar_carro(Carro *carro)
 
 Carro* Frota::alocar_carro() 
 {
-    if (_carros.empty()) {
+    if (_carros.empty()) 
         throw zero_carros_disponiveis_e();
-    }
     
     Carro* alocado = _carros.front();
     _carros.pop_front();
@@ -29,4 +28,3 @@ void Frota::cadastrar_carro(std::string cor, unsigned int id)
     
     adicionar_carro(novoCarro);
 }
-

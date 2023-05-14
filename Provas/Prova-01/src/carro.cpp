@@ -1,23 +1,28 @@
 #include <string>
 #include "../include/carro.h"
 
-Carro::Carro(std::string cor, unsigned int id) {
+Carro::Carro(std::string cor, unsigned int id) 
+{
     _cor = cor;
     _id = id;
 }
 
-std::string Carro::get_cor() {
+std::string Carro::get_cor() 
+{
     return _cor;
 }
 
-unsigned int Carro::get_id() {
+unsigned int Carro::get_id() 
+{
     return _id;
 }
 
-void Carro::seta_ocupado() {
+void Carro::seta_ocupado() 
+{
     _ocupado = true;
 }
 
-bool Carro::ocupado() {
+bool Carro::ocupado() 
+{
     return _ocupado;
 }
