@@ -5,6 +5,7 @@
 #include <string>
 #include <set>
 #include <list>
+#include <map>
 
 #include "carro.h"
 
@@ -25,6 +26,7 @@ class id_ja_existe_e {};
 class Frota {
     private:
         std::list<Carro*> _carros;
+        std::map<unsigned int, Carro*> _carros_alocados;
     public:
         /*
          * @brief Cadastra um carro novo no sistema.
@@ -42,6 +44,11 @@ class Frota {
          *        cadastrado mais no passado.
          */
         Carro* alocar_carro();
+
+        /*
+         * @brief Limpa todos os carros cadastrados.
+         */
+        void limpar_carros_cadastrados();
 };
 
 #endif

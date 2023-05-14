@@ -55,6 +55,11 @@ class Sistema {
          * @throws Lança uma exceção o login esteja indisponível.
          */
         Cliente* cadastra_cliente(std::string nome);
+
+        /*
+         * @brief Limpa os clientes cadastrados no sistema.
+         */
+        void limpar_todos_os_clientes();
         
         /*
          * @brief Busca um carro para atender a uma corrida.

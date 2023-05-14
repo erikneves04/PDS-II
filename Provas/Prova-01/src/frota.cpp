@@ -13,6 +13,8 @@ Carro* Frota::alocar_carro()
     Carro* alocado = _carros.front();
     _carros.pop_front();
 
+    _carros_alocados[alocado->get_id()] = alocado;
+
     return alocado;
 }
 
@@ -27,4 +29,17 @@ void Frota::cadastrar_carro(std::string cor, unsigned int id)
     Carro* novoCarro = new Carro(cor, id);
     
     adicionar_carro(novoCarro);
+}
+
+void Frota::limpar_carros_cadastrados()
+{
+    for(auto carro : _carros)
+    {
+        delete(carro);
+    }
+
+    for(auto carro : _carros_alocados)
+    {
+        delete(carro.second);
+    }
 }

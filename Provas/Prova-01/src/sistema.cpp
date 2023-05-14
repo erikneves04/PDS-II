@@ -54,3 +54,11 @@ Carro* Sistema::busca_uber(std::string nome)
 
     return carro;
 }
+
+void Sistema::limpar_todos_os_clientes()
+{
+    for(auto cliente : _clientes)
+    {
+        delete(cliente.second);
+    }
+}
