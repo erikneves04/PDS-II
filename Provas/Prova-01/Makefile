@@ -6,7 +6,7 @@ TARGET := main
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-CFLAGS := -g -Wall -O3 -std=c++20
+CFLAGS := -g -Wall -O3 -std=c++2a
 INC := -I include/ -I third_party/
 
 $(TARGET): $(OBJECTS)
@@ -16,8 +16,8 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
-test: main
-    ./main
+test: $(TARGET)
+	./$(TARGET)
 
 clean:
 	$(RM) -r $(BUILDDIR)/* $(TARGET)
