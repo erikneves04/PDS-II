@@ -46,11 +46,6 @@ class Cliente {
          * @brief Pega o login do cliente
          */     
         std::string get_login();
-
-        /*
-         * @brief Pega o nome do cliente(que corresponde ao login também)
-         */   
-        std::string get_nome();
 };
 
 #endif

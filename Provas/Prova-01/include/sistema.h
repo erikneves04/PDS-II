@@ -28,12 +28,39 @@ class Sistema {
         Frota _frota;
         double _preco_corrida;
     public:
+        /*
+         * @brief Constroi um sistema inicializando o preço da corrida como zero.
+         */
         Sistema();
+
+        /*
+         * @brief Constroi um sistema.
+         * @throws Lança uma exceção se o preço informado for menor que zero.
+         */
         Sistema(double preco_corrida);
+
+        /*
+         * @brief Adiciona um carro a frota.
+         * @throws Lança uma exceção caso o id já esteja cadastrado.
+         */
         void adicionar_carro(std::string cor, unsigned int id);
+
+        /*
+         * @brief Adiciona um carro a frota.
+         */
         void adicionar_carro(Carro* carro);
-        Cliente *cadastra_cliente(std::string nome);
-        Carro *busca_uber(std::string nome);
+
+        /*
+         * @brief Cadastra um novo cliente no sistema.
+         * @throws Lança uma exceção o login esteja indisponível.
+         */
+        Cliente* cadastra_cliente(std::string nome);
+        
+        /*
+         * @brief Busca um carro para atender a uma corrida.
+         * @throws Lança uma exceção caso o login informado não exista, ou o cliente não possua saldo suficiente.
+         */
+        Carro* busca_uber(std::string nome);
 };
 
 #endif

@@ -25,16 +25,18 @@ class id_ja_existe_e {};
 class Frota {
     private:
         std::list<Carro*> _carros;
-        std::set<unsigned int> _ids_disponiveis;
     public:
         /*
          * @brief Cadastra um carro novo no sistema.
-         *        o id dos carros tem que ser únicos
-         *        se não, uma exceção deve ser lançada.
+         * @throws Lança uma exceção se o id informado já for usado por outro carro.
          */
         void cadastrar_carro(std::string cor, unsigned int id);
         
-        void adicionar_carro(Carro *carro);
+        /*
+         * @brief Adiciona um novo carro aos carros da frota
+         */
+        void adicionar_carro(Carro* carro);
+        
         /*
          * @brief Aloca um carro. O carro alocado deve ser aquele que foi
          *        cadastrado mais no passado.
