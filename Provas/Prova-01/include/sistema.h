@@ -24,7 +24,6 @@ class preco_invalido_e {};
 class Sistema {
     private:
         std::map<std::string, Cliente *> _clientes;
-        std::map<unsigned int, std::string> _carros_alocados;
         Frota _frota;
         double _preco_corrida;
     public:
