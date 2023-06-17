@@ -31,3 +31,4 @@
 *.out
 *.app
 Provas/Prova-01/main
+.vscode/settings.json
