@@ -35,3 +35,6 @@ Provas/Prova-01/main
 Provas/Prova-02-Heranca/bin/tester
 Provas/Prova-02-Heranca/.vscode/settings.json
 Provas/Prova-02-Heranca/bin/main
+*.gcno
+*.gcov
+*.gcda

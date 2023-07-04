@@ -98,3 +98,97 @@ TEST_CASE("04 - Acessando métodos das classes filhas") {
     CHECK(poligono4->get_volume()==8);
     CHECK(abs(poligono5->get_area()-12.5664)<0.001);
 }
+
+TEST_CASE("5 - Testando cálculo de área e perímetro para formas geométricas simples") {
+    Triangulo t("verde", 5, 12, 13);
+    Quadrado q("azul", 8);
+    Circulo c("amarelo", 6);
+
+    // Área e perímetro do triângulo de lados 5, 12 e 13
+    CHECK(t.get_area() == 30);
+    CHECK(t.get_perimetro() == 30);
+
+    // Área e perímetro do quadrado de lado 8
+    CHECK(q.get_area() == 64);
+    CHECK(q.get_perimetro() == 32);
+
+    // Área e perímetro do círculo de raio 6
+    CHECK(abs(c.get_area() - 113.097) < 0.001);
+    CHECK(abs(c.get_perimetro() - 37.6991) < 0.001);
+}
+
+TEST_CASE("6 - Testando cálculo de volume para formas 3D") {
+    Cubo c("roxo", 5);
+    Esfera e("vermelho", 4);
+
+    // Volume do cubo de lado 5
+    CHECK(c.get_volume() == 125);
+
+    // Volume da esfera de raio 4
+    CHECK(abs(e.get_volume() - 268.083) < 0.001);
+}
+
+TEST_CASE("7 - Testando polimorfismo com objetos da classe base") {
+    Triangulo t("azul", 5, 12, 13);
+    Quadrado q("verde", 8);
+    Circulo c("amarelo", 6);
+
+    Forma2D *forma1 = &t;
+    Forma2D *forma2 = &q;
+    Forma2D *forma3 = &c;
+
+    // Verificando acesso aos métodos das classes base
+    CHECK(forma1->get_area() == 30);
+    CHECK(forma2->get_area() == 64);
+    CHECK(abs(forma3->get_area() - 113.097) < 0.001);
+
+    // Verificando nomes das formas
+    CHECK(forma1->get_nome() == "triangulo");
+    CHECK(forma2->get_nome() == "quadrado");
+    CHECK(forma3->get_nome() == "circulo");
+}
+
+TEST_CASE("8 - Testando polimorfismo com objetos das classes derivadas") {
+    Triangulo t("azul", 5, 12, 13);
+    Quadrado q("verde", 8);
+    Circulo c("amarelo", 6);
+
+    Forma2D *forma1 = &t;
+    Forma2D *forma2 = &q;
+    Forma2D *forma3 = &c;
+
+    // Verificando acesso aos métodos das classes derivadas
+    CHECK(forma1->get_area() == 30);
+    CHECK(forma2->get_area() == 64);
+    CHECK(abs(forma3->get_area() - 113.097) < 0.001);
+}
+
+TEST_CASE("9 - Testando polimorfismo com objetos das classes base e derivadas") {
+    Triangulo t("azul", 5, 12, 13);
+    Quadrado q("verde", 8);
+    Cubo cb("roxo", 5);
+
+    Forma2D *forma1 = &t;
+    Forma2D *forma2 = &q;
+    Forma3D *forma3 = &cb;
+
+    // Verificando acesso aos métodos das classes base e derivadas
+    CHECK(forma1->get_area() == 30);
+    CHECK(forma2->get_area() == 64);
+    CHECK(forma3->get_volume() == 125);
+}
+
+TEST_CASE("10 - Testando acesso a atributos protegidos das classes derivadas") {
+    Triangulo t("azul", 6, 7, 8);
+    Quadrado q("verde", 4);
+    Cubo c("roxo", 4);
+    Esfera e("amarelo", 3);
+    Circulo cr("rosa", 2);
+
+    // Verificando acesso a atributos protegidos
+    CHECK(t.get_cor() == "azul");
+    CHECK(q.get_cor() == "verde");
+    CHECK(c.get_cor() == "roxo");
+    CHECK(e.get_cor() == "amarelo");
+    CHECK(cr.get_cor() == "rosa");
+}
