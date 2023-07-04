@@ -104,9 +104,34 @@ TEST_CASE("05 - Inserção de membros de classes derivadas e cálculo de custo p
     CHECK(pacotes.custo_total("Paulo") == 44);
     CHECK(pacotes.custo_total() == 95);
     
-    delete p1;
-    delete p2;
-    delete p3;
-    delete p4;
+    delete static_cast<OverNightPackage*>(p1);
+    delete static_cast<OverNightPackage*>(p2);
+    delete static_cast<TwoDayPackage*>(p3);
+    delete static_cast<TwoDayPackage*>(p4);
     delete p5;
+}
+
+TEST_CASE("06 - Testando o cálculo de custo total de pacotes com pacotes de diferentes tipos") {
+    Package* p1 = new OverNightPackage(2, 5, 7, "Maria", "Rio");
+    Package* p2 = new TwoDayPackage(5, 2, 4, "Josias", "Juazeiro");
+    Package* p3 = new Package(3, 4, "Carlos", "Salvador");
+
+    DestinationPackages pacotes;
+    pacotes.add_package(p1);
+    pacotes.add_package(p2);
+    pacotes.add_package(p3);
+
+    CHECK(pacotes.custo_total("Maria") == 24);
+    CHECK(pacotes.custo_total("Josias") == 14);
+    CHECK(pacotes.custo_total("Carlos") == 12);
+    CHECK(pacotes.custo_total() == 50);
+
+    delete static_cast<OverNightPackage*>(p1);
+    delete static_cast<TwoDayPackage*>(p2);
+    delete p3;
+}
+
+TEST_CASE("07 - Testando o cálculo de custo total com pacote nulo") {
+    DestinationPackages pacotes;
+    CHECK(pacotes.custo_total() == 0);
 }
