@@ -2,12 +2,15 @@
 
 #include <cassert>
 #include <vector>
+#include <map>
 
 // Define um vetor de qualquer Tipo cujos índices variam em
 // qualquer intervalo, inclusive negativos.
 template <class Tipo> 
 class Vetor 
 {
+  private:
+    std::map<int, bool> _inicializados;
   public:
     // Cria um vetor cujos índices variam de 'inicio' até 'fim'.
     // PRECONDIÇÃO: fim >= inicio.
@@ -69,7 +72,9 @@ Vetor<Tipo>::Vetor(int inicio, int fim) :
         throw exception;
     }
 
-    elementos_.resize(fim - inicio + 1);
+    int tamanho = fim - inicio;
+    elementos_.resize(tamanho);
+
 }
 
 template <class Tipo> 
@@ -87,6 +92,7 @@ void Vetor<Tipo>::atribuir(int i, Tipo valor)
     
     int j = i - inicio_;
     elementos_[j] = valor;
+    _inicializados[j] = true;
 }
 
 template <class Tipo> 
@@ -104,7 +110,7 @@ Tipo Vetor<Tipo>::valor(int i) const
 
     int j = i - inicio_;    
 
-    if (!elementos_[j])
+    if (_inicializados.count(j) == 0)
     {
         auto exception = ExcecaoIndiceNaoInicializado();
         exception.indice = i;
