@@ -13,7 +13,7 @@
 #include <math.h>
 
 
-TEST_CASE("01 - Testando construção de classes derivadas com seus respectivos atributos") {
+TEST_CASE("1 - Testando construção de classes derivadas com seus respectivos atributos") {
     //construtores devem setar o nome das formas. Exemplo, ao criar um quadrado, o campo quadrado
     //deve receber o valor "quadrado"
     
@@ -25,7 +25,7 @@ TEST_CASE("01 - Testando construção de classes derivadas com seus respectivos 
 
 }
 
-TEST_CASE("02 - Acessando métodos das classes base") {
+TEST_CASE("2 - Acessando métodos das classes base") {
     Triangulo t("azul", 6, 7, 8);
     CHECK((abs(t.get_area()-20.3331625676))<0.0001);
     CHECK(t.get_perimetro() == 21);
@@ -38,6 +38,7 @@ TEST_CASE("02 - Acessando métodos das classes base") {
     CHECK(c.get_volume() == 64);
     
     Esfera e("amarelo", 3);
+
     CHECK(abs(e.get_volume()-113.097)<0.01);
     
     Circulo cr("rosa", 2);
@@ -46,7 +47,7 @@ TEST_CASE("02 - Acessando métodos das classes base") {
 
 }
 
-TEST_CASE("03 - Instanciando objetos com classe base") {
+TEST_CASE("3 - Instanciando objetos com classe base") {
     Triangulo triangulo("azul", 7, 5, 4);
     Quadrado quadrado("vermelho", 7);
     Esfera esfera("roxo", 3);
@@ -78,7 +79,7 @@ TEST_CASE("03 - Instanciando objetos com classe base") {
     
 }
 
-TEST_CASE("04 - Acessando métodos das classes filhas") {
+TEST_CASE("4 - Acessando métodos das classes filhas") {
     Triangulo triangulo("azul", 7, 5, 4);
     Quadrado quadrado("vermelho", 7);
     Esfera esfera("roxo", 3);
@@ -119,13 +120,17 @@ TEST_CASE("5 - Testando cálculo de área e perímetro para formas geométricas 
 
 TEST_CASE("6 - Testando cálculo de volume para formas 3D") {
     Cubo c("roxo", 5);
-    Esfera e("vermelho", 4);
 
     // Volume do cubo de lado 5
     CHECK(c.get_volume() == 125);
 
     // Volume da esfera de raio 4
-    CHECK(abs(e.get_volume() - 268.083) < 0.001);
+    Esfera e1("vermelho", 4);
+    CHECK(abs(e1.get_volume() - 268.083) < 0.001);
+
+    // Volume da esfera de raio 5
+    Esfera e2("vermelho", 5);
+    CHECK(abs(e2.get_volume() - 523.5983) < 0.001);
 }
 
 TEST_CASE("7 - Testando polimorfismo com objetos da classe base") {
@@ -191,4 +196,79 @@ TEST_CASE("10 - Testando acesso a atributos protegidos das classes derivadas") {
     CHECK(c.get_cor() == "roxo");
     CHECK(e.get_cor() == "amarelo");
     CHECK(cr.get_cor() == "rosa");
+}
+
+TEST_CASE("11 - Polimorfismo dos atributos de cor") {
+    Triangulo triangulo("azul", 7, 5, 4);
+    Quadrado quadrado("vermelho", 7);
+    Esfera esfera("roxo", 3);
+    Cubo cubo("rosa", 2);
+    Circulo circulo("amarelo", 2);
+    
+    Forma2D *poligono1 = &quadrado;
+    Forma2D *poligono2 = &triangulo;
+    Forma3D *poligono3 = &esfera;
+    Forma3D *poligono4 = &cubo;
+    Forma2D *poligono5 = &circulo;
+    
+    //checando nomes
+    CHECK(poligono1->get_cor() == "vermelho");
+    CHECK(poligono2->get_cor() == "azul");
+    CHECK(poligono3->get_cor() == "roxo");
+    CHECK(poligono4->get_cor() == "rosa");
+    CHECK(poligono5->get_cor() == "amarelo");
+}
+
+TEST_CASE("12 - Polimorfismo dos atributos de nome") {
+    Triangulo triangulo("azul", 7, 5, 4);
+    Quadrado quadrado("vermelho", 7);
+    Esfera esfera("roxo", 3);
+    Cubo cubo("rosa", 2);
+    Circulo circulo("amarelo", 2);
+    
+    Forma2D *poligono1 = &quadrado;
+    Forma2D *poligono2 = &triangulo;
+    Forma3D *poligono3 = &esfera;
+    Forma3D *poligono4 = &cubo;
+    Forma2D *poligono5 = &circulo;
+    
+    //checando nomes
+    CHECK(poligono1->get_nome() == "quadrado");
+    CHECK(poligono2->get_nome() == "triangulo");
+    CHECK(poligono3->get_nome() == "esfera");
+    CHECK(poligono4->get_nome() == "cubo");
+    CHECK(poligono5->get_nome() == "circulo");
+}
+
+TEST_CASE("13 - Polimorfismo pro cálculo de volume") {
+    Cubo cubo1("rosa", 2);
+    Cubo cubo2("rosa", 3);
+    Cubo cubo3("rosa", 4);
+    Esfera esfera("roxo", 4);
+
+    Forma3D *poligono1 = &esfera;
+    Forma3D *poligono2 = &cubo1;
+    Forma3D *poligono3 = &cubo2;
+    Forma3D *poligono4 = &cubo3;
+    
+    CHECK(abs(poligono1->get_volume() - 268.083) < 0.001);
+
+    CHECK(poligono2->get_volume() == 8);
+    CHECK(poligono3->get_volume() == 27);
+    CHECK(poligono4->get_volume() == 64);
+}
+
+TEST_CASE("14 - Calculando área de um triangulo isoceles") {
+    Triangulo isoceles("azul", 10, 10, 12);
+    CHECK(abs(isoceles.get_area() - 48) < 0.01);
+}
+
+TEST_CASE("14 - Calculando área de um triangulo escaleno") {
+    Triangulo escaleno("azul", 13, 9, 18);
+    CHECK(abs(escaleno.get_area() - 55.4977) < 0.01);
+}
+
+TEST_CASE("14 - Calculando área de um triangulo equilatero") {
+    Triangulo equilatero("azul", 12, 12, 12);
+    CHECK(abs(equilatero.get_area() - 62.35) < 0.01);
 }

@@ -26,6 +26,8 @@ class Package
         */
         Package(unsigned int peso, unsigned int custoPorQuilo, std::string nome, std::string endereco);
     
+        //virtual ~Package();
+
         /**
          * @brief Calcula o preço do envio.
          * @return o valor total do despacho.
