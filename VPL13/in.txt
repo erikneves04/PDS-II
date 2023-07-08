@@ -1,0 +1,11 @@
+pedido
+pizza
+Calabresa,4,1,2,40
+pizza
+Frango com catupity,6,0,1,55.90
+pizza
+Camarao,8,0,1,62.90
+pizza
+Portuguesa,8,0,1,50.90
+endereco
+Rua Lavras 158 Sao Pedro, Belo Horizonte
